@@ -1,0 +1,19 @@
+ <!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.app.model.Address" table="Address_MTM">
+		<id name="addrId" > <!-- Singular Identifier Cfg -->
+		</id>
+		<property name="location"/>
+		
+		<idbag name="emps" table="EMP_ADDR" cascade="all"  lazy="extra">
+		   <collection-id type="int" column="Index">
+		   	<generator class="increment"/>
+		   </collection-id>
+		   <key column="AddressID"/>
+		   <many-to-many class="com.app.model.Employee" column="EmployeeID" fetch="join" outer-join="true"/>
+		</idbag>
+	</class>
+</hibernate-mapping>
